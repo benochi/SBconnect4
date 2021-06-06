@@ -52,9 +52,9 @@ function makeHtmlBoard() {
   // TODO: add comment for this code
   for (let y = 0; y < HEIGHT; y++) {  //iterates and increments y until = to height
     const row = document.createElement("tr");  //as it iterates creates a Table - ROW
-    for (let x = 0; x < WIDTH; x++) { //nested loop iterates and icnrements x until = WIDTH
+    for (let x = 0; x < WIDTH; x++) { //nested loop iterates and increments x until = WIDTH
       const cell = document.createElement("td"); //creates Table Data Cell element for x until done, then move to next TR
-      cell.setAttribute("id", `${y}-${x}`); //gives each cell an ID based on x and y values IE [[0,0]. [1,0]] etc. 
+      cell.setAttribute("id", `${y}${x}`); //gives each cell an ID based on x and y values IE [[0-0]. [1-0]] etc. 
       row.append(cell); //appends to the TABLE ROW "row" the cell on each iteration. 
     }
     board.append(row); //appends the row to the board. 
@@ -64,7 +64,7 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {  //This caused many headaches. 
-  for (let y = HEIGHT - 1; y >= 0; y--) { //iterate ask mentor why I couldn't use HEIGHT and y >= 1
+  for (let y = HEIGHT - 1; y >= 0; y--) { //iterate and decrement
     if (!board[y][x]) { //if not already taken. 
       return y; 
     }
@@ -77,10 +77,10 @@ function findSpotForCol(x) {  //This caused many headaches.
 function placeInTable(y, x) {
   const piece = document.createElement('div');
   piece.classList.add('piece');  //give default shape and size to the piece
-  piece.classList.add(`p${currPlayer}`); //gives piece.p# id for styling color red/blue 
+  piece.classList.add(`player${currPlayer}`); //gives piece.p# id for styling color red/blue 
   piece.style.top = -50 * (y + 2);  //this is the location for the style, it sets the token to be centered in the cell. 
 
-  const location = document.getElementById(`${y}-${x}`); //pulls the ID assigned on creation. 
+  const location = document.getElementById(`${y}${x}`); //pulls the ID assigned on creation. 
   location.append(piece);  //adds the piece to the location.
 }
 
